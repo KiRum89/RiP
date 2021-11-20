@@ -43,7 +43,7 @@ def get_ray(init_cond,ncycle):
         a = np.real( dD_dr(X,Y,nz,nx,dnz_dr,dnx_dr,dX_dr,dY_dr,m) / dD_dw( X,Y,nz,nx,m  ) )
         arr = np.array([vg,a])
 
-        print cold_disp_rel(X,Y,nz,nx,m), vg[0],vg[1]
+        print(cold_disp_rel(X,Y,nz,nx,m), vg[0],vg[1])
 
         return arr.reshape(4*Num)
 
@@ -53,7 +53,7 @@ def get_ray(init_cond,ncycle):
     
       
         init = init_cond
-        print init
+        print(init)
         soln = odeint(f,np.reshape(init,4*Num),t,full_output=0, printmessg=1) 
 
 

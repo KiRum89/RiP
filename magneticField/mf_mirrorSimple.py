@@ -27,13 +27,10 @@ def Yz( r):
 
     #return np.array([(z/0.3612)**2+0.85]) #parabolic fir for mf_ebw_only
     return (z/1.106)**2+0.796 #6coils simple
+
 def Yx( r):
-            
     z,x=r
     return np.zeros(z.size)# check first without Yx-np.sum(T1*T2,axis=0)*np.sign(x)
-
-
-
 
 def gradY(r):
     z,x = r

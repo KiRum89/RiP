@@ -98,7 +98,7 @@ class HotDiTen:
     def zeta(self,n):
         val=(1+n*self.Yabs)/(self.Nz)/self.gamma #should be |Nz| or Nz?
         if val.any() > 1e8:
-            print "zeta is very big. Fadeeva wont like it"
+            print( "zeta is very big. Fadeeva wont like it")
         return val
 
         
