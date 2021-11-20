@@ -29,7 +29,7 @@ def dD_du(u,X,Y,gamma,Nz,Nx):
 def dD_dN(X,Y,gamma,Nz,Nx,dNz_dN,dNx_dN):
     val=dD_du("Nx",X,Y,gamma,Nz,Nx)*dNx_dN+dD_du("Nz",X,Y,gamma,Nz,Nx)*dNz_dN
     if np.abs(val)[0] < 1e-12 or np.abs(val)[1] < 1e-12:
-        print "dD_dN is small"
+        print( "dD_dN is small")
     return val
 
 

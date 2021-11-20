@@ -13,10 +13,8 @@ sys.path.insert(0,os.path.abspath("scenarios"))
 
 
 
-magnetic_field_model ='slab'
-
-
-plasma_model = 'slab'
+magnetic_field_model ='simple'
+plasma_model = 'mirror'
 
 verbose=True #to control some printed message
 
@@ -24,16 +22,10 @@ if plasma_model== "slab":
     p = __import__("plasma_slab")
 
 if plasma_model == "mirror":
-
     p = __import__("plasma")
 
-
 if plasma_model == "mirror_bvp":
-
     p = __import__("plasma_bvp")
-
-
-
 
 if magnetic_field_model == "slab":
     mf = __import__("mf_slab")
@@ -52,5 +44,5 @@ if magnetic_field_model == "mirror":
 if magnetic_field_model == "simple":
     mf = __import__("mf_mirrorSimple")
 
-print plasma_model
-print magnetic_field_model
+print(plasma_model)
+print(magnetic_field_model)
