@@ -14,7 +14,7 @@ sys.path.insert(0,os.path.abspath("scenarios"))
 
 
 magnetic_field_model ='simple'
-plasma_model = 'mirror'
+plasma_model = 'parab'
 
 verbose=True #to control some printed message
 
@@ -26,6 +26,9 @@ if plasma_model == "mirror":
 
 if plasma_model == "mirror_bvp":
     p = __import__("plasma_bvp")
+if plasma_model == "parab":
+    p = __import__("plasma_parab")
+
 
 if magnetic_field_model == "slab":
     mf = __import__("mf_slab")

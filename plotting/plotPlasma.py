@@ -15,7 +15,7 @@ def plot(soln):
 
     i=0
     z = np.linspace(-2,2,Num)
-    r = np.linspace(2,0,Num)
+    r = np.linspace(-1,1,Num)
     for x in r:
         x = x*np.ones(500)
         Yz[i,:] = mf.Yz((z,x))
@@ -32,7 +32,7 @@ def plot(soln):
     Y=np.sqrt(Yz**2+Yx**2)
 
 
-    im=ax1.imshow(X,cmap=plt.cm.Blues,extent=[-2,2,0,2] )
+    im=ax1.imshow(X,cmap=plt.cm.Blues,extent=[-2,2,-1,1] )
 
     cuhr=ax1.contour(z,r,np.sqrt(Y**2+X ),np.array([1]),linewidths=2, colors="red"  )
     ax1.clabel(cuhr,inline=True,fmt="UHR",fontsize=12)
@@ -55,3 +55,5 @@ def plot(soln):
     ax1.set_aspect('equal')
     if len(soln)>0:
         plt.plot(soln[:,0],soln[:,1])
+
+    return X

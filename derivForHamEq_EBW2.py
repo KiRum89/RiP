@@ -9,7 +9,7 @@ def dD_du(u,X,Y,gamma,Nz,Nx):
 
 
 
-    num_term = 20 #in future will be global or define in a settings file
+    num_term = 10 #in future will be global or define in a settings file
     
     hdt=HotDiTen(X,Y,gamma,Nz,Nx,num_term)
     dielTen = [hdt.Kxx(),hdt.Kyy(),hdt.Kzz(),hdt.Cxy(),hdt.Cxz(),hdt.Cyz()]

@@ -30,15 +30,15 @@ ncycle =params.ncycle
 
 Te = params.Te #set the the Te
 
-z0 = np.array([0])
-x0=np.array([1.2])
+z0 = np.array([0.001])
+x0=np.array([-0.77])
 
 
 r = np.array([z0,x0])
 X = p.X(r)
 Y = mf.Yabs(r)
 
-data = X,Y,p.gamma(10),Nz0
+data = X,Y,p.gamma(500),Nz0
 
 Nx0 = coldNx_Xm(X,Y,Nz0)
 Nx0=fsolve(hot_disp_rel_wrapp,Nx0,args=data)
@@ -50,5 +50,5 @@ init_cond=np.array([z0,x0,Nz0,Nx0])
 soln=hot.get_ray(init_cond,ncycle)	
 #make gamma in the config!
 print(init_cond)
-soln = {"init_cond":init_cond,"soln":soln,"ncycle":ncycle,"gamma":p.gamma(10)}
+soln = {"init_cond":init_cond,"soln":soln,"ncycle":ncycle,"gamma":p.gamma(500)}
                     

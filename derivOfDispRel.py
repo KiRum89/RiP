@@ -1,5 +1,5 @@
 from selector import H
-from derivOfHotDiTen import DerivOfHotDiTen
+from derivOfHotDiTen import DerivOfHotDiTen,DerivOfHotDiTen_num
 from hotDiTen import HotDiTen
 from dispRel import A,B,C
 
@@ -41,7 +41,7 @@ def dD_du(u,X,Y,gamma,Nz,Nx):
 
 
 
-    num_term = 20 #in future will be global or define in a settings file
+    num_term = 10 #in future will be global or define in a settings file
     
     hdt=HotDiTen(X,Y,gamma,Nz,Nx,num_term)
     dielTen = [hdt.Kxx(),hdt.Kyy(),hdt.Kzz(),hdt.Cxy(),hdt.Cxz(),hdt.Cyz()]
@@ -49,7 +49,7 @@ def dD_du(u,X,Y,gamma,Nz,Nx):
     derivOfDielTen = [ddt.dKxx_du(u), ddt.dKyy_du(u), ddt.dKzz_du(u), ddt.dCxy_du(u), ddt.dCxz_du(u), ddt.dCyz_du(u)]
    
 
-    #print dielTen
+    #print( dielTen)
     #print dA_du(u,Nz,dielTen,derivOfDielTen),dB_du(u,Nz,dielTen,derivOfDielTen),dC_du(u,Nz,dielTen,derivOfDielTen)
     return Nx**4*dA_du(u,Nz,dielTen,derivOfDielTen) + 4*Nx**3*A(Nz,dielTen)*H(u,"Nx") + Nx**2*dB_du(u,Nz,dielTen,derivOfDielTen) + 2*Nx*B(Nz,dielTen)*H(u,"Nx") + dC_du(u,Nz,dielTen,derivOfDielTen)
 

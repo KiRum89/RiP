@@ -1,14 +1,8 @@
 import sys
 import os
 ##set paths to packages
-project = "RiP_general_new"
-sys.path.insert(0,os.path.abspath(""))
 import conf
 from  scipy.integrate import odeint
-
-import corrector
-
-
 
 import refractive_index as ri
 from conf import p,mf
@@ -22,8 +16,6 @@ from dispRel_EBW import disp_rel as disp_rel_ebw
 import derivForHamEq_EBW2 as ebw
 
 Num= 1
-
-useCorrector = False; #some idea: use fsolve to find Nx from the dispersion relation if D drifts too far. Didnt work
 Te=params.Te
 def get_ray(init_cond,ncycle):
 
@@ -35,12 +27,6 @@ def get_ray(init_cond,ncycle):
         X=p.X(r)
         Y=mf.Yabs(r)
         gamma = p.gamma(Te)
-	if useCorrector==True:
-
-		data = X,Y,p.gamma(Te),Nz
-		if np.abs(corrector.hot_disp_rel_wrapp(Nx,*data))>1e-4:
-			sign = np.sign(np.abs(Nx))
-			Nx=sign*fsolve(corrector.hot_disp_rel_wrapp,Nx,args=data)
 	        
         N=np.array([Nz,Nx])
         
@@ -62,17 +48,17 @@ def get_ray(init_cond,ncycle):
 
             a =  dD_dr(X,Y,gamma,nz,nx,dnz_dr,dnx_dr,dX_dr,dY_dr,dgamma_dr) / dD_dw( X,Y,gamma,nz,nx  ) 
             if conf.verbose ==True:
-	    	print('disp rel cold:{}, disp rel:{},x:{} '.format(cold_disp_rel(X,Y,nz,nx,"Xm"),disp_rel(X,Y,gamma,nz,nx), x))
+                print('disp rel cold:{}, disp rel:{},x:{} '.format(cold_disp_rel(X,Y,nz,nx,"Xm"),disp_rel(X,Y,gamma,nz,nx), x))
             #if disp_rel(X,Y,gamma,nz,nx)>0:
 	    #break
         else:
             vg = -np.real( ebw.dD_dN( X,Y,gamma,nz,nx,dnz_dN,dnx_dN  ) / ebw.dD_dw( X,Y,gamma,nz,nx  ) )
        
             if vg[0]>1 or vg[1]>1:
-                print "vg",vg[0],vg[1]
+                print( "vg",vg[0],vg[1])
 
-	    if conf.verbose==True:
-            	print( "EBW",'x:{},X:{},dispRel:{},nx:{},nz:{},'.format(x,X,disp_rel_ebw(X,Y,gamma,nz,nx), nx, nz))
+            if conf.verbose==True:
+                print( "EBW",'x:{},X:{},dispRel:{},nx:{},nz:{},'.format(x,X,disp_rel_ebw(X,Y,gamma,nz,nx), nx, nz))
 	    #if  np.abs(disp_rel_ebw(X,Y,gamma,nz,nx))>1e-4:
 	    #break         
             a = ebw.dD_dr(X,Y,gamma,nz,nx,dnz_dr,dnx_dr,dX_dr,dY_dr,dgamma_dr) / ebw.dD_dw( X,Y,gamma,nz,nx  ) 
@@ -88,7 +74,7 @@ def get_ray(init_cond,ncycle):
     
       
         init = np.real(init_cond)
-        soln = odeint(f,np.reshape(init,4*Num),t,full_output=0, printmessg=1) 
+        soln = odeint(f,np.reshape(init,4*Num),t,full_output=1, printmessg=1) 
 
 
 

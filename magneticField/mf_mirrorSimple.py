@@ -26,7 +26,7 @@ def Yz( r):
     z,x = r
 
     #return np.array([(z/0.3612)**2+0.85]) #parabolic fir for mf_ebw_only
-    return (z/1.106)**2+0.796 #6coils simple
+    return (z/0.3)**2+0.7*np.ones(z.size)#(z/4)**2+0.7 #6coils simple
 
 def Yx( r):
     z,x=r
@@ -41,7 +41,7 @@ def gradY(r):
     dY_dz=Yvec(r_dz) - Yvec(r)
     dY_dx=Yvec(r_dx) - Yvec(r)
     #return np.array([dY_dz,dY_dx])/dr
-    return np.array([ np.array([2/1.106*z,np.zeros(z.size)]),np.array([np.zeros(z.size) ,np.zeros(z.size) ])])
+    return np.array([ np.array([2/0.3*z,np.zeros(z.size)]),np.array([np.zeros(z.size) ,np.zeros(z.size) ])])
 
 
 
